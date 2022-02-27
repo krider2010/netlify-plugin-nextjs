@@ -46,6 +46,11 @@ const plugin: NetlifyPlugin = {
     netlifyConfig.build.environment ||= {}
     // eslint-disable-next-line unicorn/consistent-destructuring
     netlifyConfig.build.environment.NEXT_PRIVATE_TARGET = 'server'
+    // eslint-disable-next-line unicorn/consistent-destructuring
+    netlifyConfig.build.environment.NEXTAUTH_URL = netlifyConfig.build.environment.NEXTAUTH_URL_INTERNAL
+      ? // eslint-disable-next-line unicorn/consistent-destructuring
+        netlifyConfig.build.environment.NEXTAUTH_URL_INTERNAL
+      : process.env.URL
   },
 
   async onBuild({

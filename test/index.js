@@ -202,6 +202,26 @@ describe('preBuild()', () => {
     await plugin.onPreBuild({ ...defaultArgs, netlifyConfig })
     expect(netlifyConfig.build.environment.NEXT_PRIVATE_TARGET).toBe('server')
   })
+
+  it('adds in NEXTAUTH_URL', async () => {
+    const netlifyConfig = { ...defaultArgs.netlifyConfig }
+
+    const url = 'Canonical URL'
+    process.env.URL = url
+
+    await plugin.onPreBuild({ ...defaultArgs, netlifyConfig })
+    expect(netlifyConfig.build.environment.NEXTAUTH_URL).toBe(url)
+  })
+
+  it ('honours NEXTAUTH_URL_INTERNAL as NEXTAUTH_URL if it exists', async () => {
+    const netlifyConfig = { ...defaultArgs.netlifyConfig }
+
+    const url = 'Internal URL'
+    netlifyConfig.build.environment.NEXTAUTH_URL_INTERNAL = url
+
+    await plugin.onPreBuild({ ...defaultArgs, netlifyConfig })
+    expect(netlifyConfig.build.environment.NEXTAUTH_URL).toBe(url)
+  })
 })
 
 describe('onBuild()', () => {
