@@ -25,6 +25,10 @@ Run:
 npm install
 ```
 
+If you are on an Apple M1 (arm64) Mac then you may need to follow
+[these instructions](https://rickynguyen.medium.com/puppeteer-for-apple-m1-43a5c31e4f9d) to get things
+installed correctly.
+
 Make sure everything is correctly setup with:
 
 ```bash
